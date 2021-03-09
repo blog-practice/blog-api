@@ -1,0 +1,44 @@
+My blog:
+1. Homepage
+   a. Show list of latest blogs
+   b. show most popular blogs
+2. Blog Details
+   a. Show blog details
+      i. blog title
+      ii. content
+      iii. likes
+      iv. views /
+      v. post date
+      vi. comments
+           - comments should be paginated
+           - each comments has
+               a. commenter name
+               b. comment
+               c. likes
+               d. create date
+      vii. blog tags
+ 3. tags page
+   a. show blog posts by tag
+   b. it should be paginated
+
+
+
+- //Delete Blog
+     //Delete Comment
+     // get blogs by tag
+     // 1. blog create garne bela tag add garne
+     //get popular blogs
+     //search blog by title
+
+     //get Blogs by tag
+     //get blogs by tags
+
+Domains:
+1. Blog
+   a. id, title, createdDate, comments, likes, views, tags, content, status, author
+2. Comment
+   a. id, user, likes, content, commentDate
+3. tag
+   a. id, name
+4. User
+   a. id, name, email, password, registeredDate
