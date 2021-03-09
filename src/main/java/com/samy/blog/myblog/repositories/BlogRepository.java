@@ -17,5 +17,5 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
     @Query("select  b from Blog  b left join b.comments c group by b.id order by b.likes desc, count(c) desc  ")
     List<Blog> findTop10ByOrderByLikesDescCommentsDesc();
 
-    List<Comment> findTop10OrderByCommentsDesc();
+
 }

@@ -42,3 +42,9 @@ Domains:
    a. id, name
 4. User
    a. id, name, email, password, registeredDate
+
+   User apis
+   1. Register a user
+   2. Login(Auth with JWT and Spring Security)
+   3. Update account
+   4. Delete Account

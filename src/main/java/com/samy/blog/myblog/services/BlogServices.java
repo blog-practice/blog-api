@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class BlogServices {
@@ -79,7 +80,7 @@ public class BlogServices {
     public List<Blog> getBlogsByTags(String tag) {
         String[] tags = tag.split(",");
         Set<String> tagSet = new HashSet<>();
-        for(String tags1 : tags){
+        for (String tags1 : tags) {
             tagSet.add(tags1);
         }
         List<Blog> blogList = getAllBlogs();
@@ -87,7 +88,7 @@ public class BlogServices {
         for (Blog blog : blogList) {
             // List<Tag> tags = fetchAllTags(blog.getId());
             for (Tag tag1 : blog.getTags()) {
-                if(tagSet.contains(tag1.getName())){
+                if (tagSet.contains(tag1.getName())) {
                     blogList1.add(blog);
                     break;
                 }
@@ -98,13 +99,34 @@ public class BlogServices {
     }
 
     public List<Blog> getPopularBlogs() {
-      List<Blog> blogs = blogRepository.findTop10ByOrderByLikesDescCommentsDesc();
-      return blogs;
+        List<Blog> blogs = blogRepository.findTop10ByOrderByLikesDescCommentsDesc();
+        return blogs;
     }
 
-    public List<Comment> getPopularComments(){
-        List<Comment> comments = blogRepository.findTop10OrderByCommentsDesc();
-        return comments;
+    public List<Comment> getPopularComments(long blogId) {
+        Blog blog = getBlogById(blogId);
+        List<Comment> comments = blog.getComments();
+        comments.sort(Comparator.comparing(Comment::getLikes, Comparator.reverseOrder()));
+        List<Comment> result = new ArrayList<>();
+        for (Comment comment : comments) {
+            if (result.size() < 10) {
+                result.add(comment);
+
+            }
+        }
+
+        return result;
+    }
+
+    public List<Blog> searchByTitle(String title) {
+        List<Blog> blogs = getAllBlogs();
+        List<Blog> results = new ArrayList<>();
+        for (Blog blog : blogs) {
+            if (blog.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                results.add(blog);
+            }
+        }
+        return results;
     }
 
 
